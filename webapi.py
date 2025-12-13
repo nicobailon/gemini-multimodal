@@ -7,7 +7,7 @@ from pathlib import Path
 
 try:
     from gemini_webapi import set_log_level
-    set_log_level("WARNING")
+    set_log_level("ERROR")
 except ImportError:
     pass
 
