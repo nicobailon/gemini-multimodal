@@ -1,0 +1,4 @@
+#!/bin/bash
+SKILL_DIR="$(cd "$(dirname "$0")" && pwd)"
+source "$SKILL_DIR/.venv/bin/activate"
+exec python3 "$SKILL_DIR/webapi.py" "$@"

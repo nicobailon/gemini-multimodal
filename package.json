@@ -1,0 +1,24 @@
+{
+  "name": "claude-gemini-skill",
+  "version": "1.0.0",
+  "description": "Gemini 3 Pro skill for Claude Code - query, analyze files/videos, generate images via browser cookies",
+  "bin": {
+    "claude-gemini-skill": "./install.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicobailon/claude-gemini-skill"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "skill",
+    "gemini",
+    "gemini-3-pro",
+    "ai",
+    "image-generation",
+    "video-analysis"
+  ],
+  "author": "nicobailon",
+  "license": "MIT"
+}
