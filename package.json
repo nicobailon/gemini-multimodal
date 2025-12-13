@@ -1,6 +1,6 @@
 {
   "name": "gemini-multimodal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gemini multimodal skill for Claude Code - video, PDF, image analysis & generation via browser cookies",
   "bin": {
     "gemini-multimodal": "./install.js"

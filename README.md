@@ -1,6 +1,19 @@
-# Gemini 3 Pro Skill
+# gemini-multimodal
 
-All-purpose Gemini 3 Pro client with Thinking enabled. Uses browser cookies for authentication - no API key required.
+Gemini multimodal skill for Claude Code. Video, PDF, image analysis & generation via browser cookies - no API key required.
+
+## Installation
+
+```bash
+npx gemini-multimodal
+```
+
+This installs the skill to `~/.claude/skills/gemini/` and sets up the Python environment automatically.
+
+**Prerequisites:**
+- Python 3.8+
+- Chrome logged into gemini.google.com
+- On macOS, allow Keychain access when prompted (first run)
 
 ## Features
 
@@ -22,17 +35,6 @@ User Request → webapi CLI → gemini-webapi → Gemini Web (cookies) → Respo
 ```
 
 Authentication uses Chrome browser cookies - no API key needed. Just be logged into gemini.google.com.
-
-## Installation
-
-```bash
-cd ~/.claude/skills/gemini
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-On macOS, grant Keychain access when prompted on first run.
 
 ## Usage
 
