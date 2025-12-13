@@ -1,13 +1,13 @@
 {
-  "name": "claude-gemini-skill",
+  "name": "gemini-multimodal",
   "version": "1.0.0",
-  "description": "Gemini 3 Pro skill for Claude Code - query, analyze files/videos, generate images via browser cookies",
+  "description": "Gemini multimodal skill for Claude Code - video, PDF, image analysis & generation via browser cookies",
   "bin": {
-    "claude-gemini-skill": "./install.js"
+    "gemini-multimodal": "./install.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nicobailon/claude-gemini-skill"
+    "url": "https://github.com/nicobailon/gemini-multimodal"
   },
   "keywords": [
     "claude",

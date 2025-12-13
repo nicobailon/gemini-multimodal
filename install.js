@@ -6,7 +6,7 @@ const https = require("https");
 const os = require("os");
 const { execSync } = require("child_process");
 
-const REPO_URL = "https://raw.githubusercontent.com/nicobailon/claude-gemini-skill/main";
+const REPO_URL = "https://raw.githubusercontent.com/nicobailon/gemini-multimodal/main";
 const SKILL_DIR = path.join(os.homedir(), ".claude", "skills", "gemini");
 
 const FILES = [
@@ -45,7 +45,7 @@ function run(cmd, opts = {}) {
 }
 
 async function main() {
-  console.log("Installing claude-gemini-skill...\n");
+  console.log("Installing gemini-multimodal skill...\n");
 
   // Create skill directory
   console.log(`Creating directory: ${SKILL_DIR}`);
