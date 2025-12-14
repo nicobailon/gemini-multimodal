@@ -147,6 +147,13 @@ def parse_args(args):
     result["prompt"] = " ".join(positional)
     return result
 
+MAX_TOKENS = 60_000
+CHARS_PER_TOKEN = 4
+MAX_CHARS = MAX_TOKENS * CHARS_PER_TOKEN
+
+def estimate_tokens(text):
+    return len(text) // CHARS_PER_TOKEN
+
 async def run(args):
     try:
         from gemini_webapi import GeminiClient
@@ -156,6 +163,12 @@ async def run(args):
         sys.exit(1)
 
     prompt = args["prompt"]
+
+    if len(prompt) > MAX_CHARS:
+        tokens = estimate_tokens(prompt)
+        print(f"Error: Prompt too large ({tokens:,} tokens, max {MAX_TOKENS:,})", file=sys.stderr)
+        print("Reduce input size or split into smaller chunks.", file=sys.stderr)
+        sys.exit(1)
     files = []
 
     if args["aspect"] and (args["generate_image"] or args["edit"]):
