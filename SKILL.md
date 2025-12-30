@@ -80,8 +80,18 @@ description: "All-purpose Gemini 3 Pro client with Thinking enabled. Query, anal
     | `--show-thoughts` | Display model's thinking process |
     | `--model MODEL` | Model to use (default: gemini-3.0-pro) |
     | `--json` | Output response as JSON |
+    | `--retries N` | Number of retries for transient failures (default: 3) |
+    | `--timeout SECS` | Client initialization timeout in seconds (default: 120) |
     | `--help, -h` | Show help |
   </cli_options>
+
+  <reliability>
+    The client includes several reliability improvements:
+    - **Retry with backoff**: Transient errors (timeouts, rate limits, 5xx) trigger automatic retries with exponential backoff
+    - **Response stability checks**: Image generation waits for stable response before saving
+    - **Extended timeouts**: Video file analysis automatically uses longer timeouts (180s)
+    - **Detailed diagnostics**: Error messages include troubleshooting suggestions
+  </reliability>
 
   <workflow>
     1. User requests analysis, generation, or query
@@ -131,13 +141,29 @@ description: "All-purpose Gemini 3 Pro client with Thinking enabled. Query, anal
 
   <troubleshooting>
     <issue name="Error initializing client">
-      <symptom>Cookie or initialization errors</symptom>
-      <solution>Ensure you're logged into gemini.google.com in Chrome. On macOS, allow Keychain access.</solution>
+      <symptom>Cookie or initialization errors, repeated init failures</symptom>
+      <solution>
+        1. Ensure you're logged into gemini.google.com in Chrome
+        2. On macOS, allow Keychain access when prompted
+        3. Try closing Chrome completely and reopening gemini.google.com
+        4. Clear Chrome cookies for gemini.google.com and re-login
+        5. Try increasing --timeout if failures are intermittent
+      </solution>
+    </issue>
+
+    <issue name="Transient/timeout errors">
+      <symptom>Timeout, connection reset, or 5xx errors</symptom>
+      <solution>The client automatically retries with backoff. If failures persist, try --retries 5 or --timeout 180. Check your network connection.</solution>
     </issue>
 
     <issue name="No images generated">
-      <symptom>Script runs but no image output</symptom>
-      <solution>Rephrase prompt. Some content may be filtered. Try being more explicit.</solution>
+      <symptom>Script runs but no image output after retries</symptom>
+      <solution>
+        1. Rephrase prompt to be more explicit about wanting an image
+        2. Some content may be filtered by safety systems
+        3. Try simpler prompts first to verify the client works
+        4. Check if the model returned text (may indicate why image failed)
+      </solution>
     </issue>
 
     <issue name="Module not found">
@@ -153,6 +179,11 @@ description: "All-purpose Gemini 3 Pro client with Thinking enabled. Query, anal
     <issue name="No thinking shown">
       <symptom>--show-thoughts returns nothing</symptom>
       <solution>Thinking may be skipped for trivial queries. Try a more complex question, or the model may have used code execution instead.</solution>
+    </issue>
+
+    <issue name="Rate limiting">
+      <symptom>Repeated failures with rate limit errors</symptom>
+      <solution>Wait a few minutes before retrying. Consider spacing out requests. The client uses exponential backoff automatically.</solution>
     </issue>
   </troubleshooting>
 
